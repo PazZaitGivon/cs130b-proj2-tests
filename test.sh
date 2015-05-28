@@ -2,7 +2,7 @@
 for i in {1..6}; do
     echo "Testing input.$i"
     rm tmp.txt -f
-    ./project < "input.$i" &> tmp.txt
+    ../project < "input.$i" &> tmp.txt
     diff tmp.txt "output.$i"
 done
 
