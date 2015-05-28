@@ -1,5 +1,5 @@
 #! /bin/bash
-for i in {1..8}; do
+for i in {1..12}; do
     echo "Testing input.$i"
     rm tmp.txt -f
     ../project < "input.$i" &> tmp.txt
