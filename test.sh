@@ -6,11 +6,11 @@ noColor="\033[0m"
 
 for i in {1..13}; do
     echo "Testing input.$i"
-    rm tmp.txt -f
+    rm -f tmp.txt
     ../project < "input.$i" &> tmp.txt
     printf "$errorColor"
     diff tmp.txt "output.$i"
     printf "$noColor"
 done
 
-rm tmp.txt -f
+rm -f tmp.txt
