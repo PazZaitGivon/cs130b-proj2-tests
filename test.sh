@@ -4,12 +4,15 @@
 errorColor="\033[0;31m"
 noColor="\033[0m"
 
-for i in {1..13}; do
+for i in {1..27}; do
     echo "Testing input.$i"
     rm -f tmp.txt
-    ../project < "input.$i" &> tmp.txt
+    actual=$(../project < "input.$i" 2> /dev/null )
+    expected=$(tail -n 1 "output.$i")
     printf "$errorColor"
-    diff tmp.txt "output.$i"
+    if [ "$actual" -ne "$expected" ] ; then
+        echo EROROROAJOWEJRAWEORJAWEJRALWJERLKAWJERLKJAWERLKJQWE
+    fi
     printf "$noColor"
 done
 
