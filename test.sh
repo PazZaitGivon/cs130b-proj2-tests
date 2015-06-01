@@ -1,7 +1,8 @@
 #! /bin/bash
 
 
-errorColor="\033[0;31m"
+errorColor="\033[1;31m"
+warningColor="\033[0;33m"
 passColor="\033[0;36m"
 noColor="\033[0;0m"
 highlight="\033[03;31m"
@@ -16,17 +17,19 @@ fi
 
 for i in {1..27}; do
     printf "Testing input.$i: "
-    rm -f tmp.txt
     actual=$(../$executable < "input.$i" 2> /dev/null )
+    actualerr=$(../$executable < "input.$i" 2>&1 > /dev/null)
     expected=$(tail -n 1 "output.$i")
+    expectederr=$(head -n -1 "output.$i")
     if [ "$actual" -ne "$expected" ] ; then
         printf "$errorColor"
         echo "fail! Expected $expected but found $actual"
+    elif [ ! "$actualerr" == "$expectederr" ] ; then
+        printf "$warningColor"
+        echo "warning: optimal solutions do not match, but this may be okay."
     else
         printf "$passColor"
         echo pass
     fi
     printf "$noColor"
 done
-
-rm -f tmp.txt
