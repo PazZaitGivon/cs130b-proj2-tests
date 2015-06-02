@@ -15,7 +15,10 @@ if [ ! -x "../$executable" ] ; then
     exit -1
 fi
 
-for i in {1..27}; do
+passes=0
+warnings=0
+failures=0
+for i in {1..500}; do
     printf "Testing input.$i: "
     actual=$(../$executable < "input.$i" 2> /dev/null )
     actualerr=$(../$executable < "input.$i" 2>&1 > /dev/null)
@@ -24,12 +27,18 @@ for i in {1..27}; do
     if [ "$actual" -ne "$expected" ] ; then
         printf "$errorColor"
         echo "fail! Expected $expected but found $actual"
+        failures=$((failures+1))
     elif [ ! "$actualerr" == "$expectederr" ] ; then
         printf "$warningColor"
         echo "warning: optimal solutions do not match, but this may be okay."
+        warnings=$((warnings+1))
     else
         printf "$passColor"
         echo pass
+        passes=$((passes+1))
     fi
     printf "$noColor"
 done
+
+
+echo "$passes passes, $warnings warnings, $failures falures."
