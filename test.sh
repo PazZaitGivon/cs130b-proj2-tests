@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 
 errorColor="\033[1;31m"
@@ -24,9 +24,9 @@ for i in {1..500}; do
     actualerr=$(../$executable < "input.$i" 2>&1 > /dev/null)
     expected=$(tail -n 1 "output.$i")
     expectederr=$(head -n -1 "output.$i")
-    if [ "$actual" -ne "$expected" ] ; then
+    if [[ ! "$actual" =~ ^-?[0-9]+$ ]] || [[ ! "$expected" =~ ^-?[0-9]+$ ]] || [[  "$actual" -ne "$expected" ]] ; then
         printf "$errorColor"
-        echo "fail! Expected $expected but found $actual"
+        echo "fail! Expected \"$expected\" but found \"$actual\""
         failures=$((failures+1))
     elif [ ! "$actualerr" == "$expectederr" ] ; then
         printf "$warningColor"
