@@ -18,13 +18,13 @@ fi
 passes=0
 warnings=0
 failures=0
-for i in {1..500}; do
+for i in {1..2000}; do
     printf "Testing input.$i: "
     actual=$(../$executable < "input.$i" 2> /dev/null )
     actualerr=$(../$executable < "input.$i" 2>&1 > /dev/null)
     expected=$(tail -n 1 "output.$i")
     expectederr=$(head -n -1 "output.$i")
-    if [[ ! "$actual" =~ ^-?[0-9]+$ ]] || [[ ! "$expected" =~ ^-?[0-9]+$ ]] || [[  "$actual" -ne "$expected" ]] ; then
+    if [[ ! "$actual" =~ ^[\s]*-?[0-9]+[\s]*$ ]] || [[ ! "$expected" =~ ^[\s]*-?[0-9]+[\s]*$ ]] || [[  "$actual" -ne "$expected" ]] ; then
         printf "$errorColor"
         echo "fail! Expected \"$expected\" but found \"$actual\""
         failures=$((failures+1))
