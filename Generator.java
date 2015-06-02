@@ -3,7 +3,7 @@ import java.util.Random;
 public class Generator {
     public static void main(String[] args) {
         Random random = new Random();
-        int N = random.nextInt(20);
+        int N = random.nextInt(20000);
         int K = random.nextInt(200);
         int S = random.nextInt(100);
         int C = random.nextInt(5);

@@ -18,7 +18,7 @@ fi
 passes=0
 warnings=0
 failures=0
-for i in {1..2000}; do
+for i in {1..2100}; do
     printf "Testing input.$i: "
     actual=$(../$executable < "input.$i" 2> /dev/null )
     actualerr=$(../$executable < "input.$i" 2>&1 > /dev/null)
