@@ -23,7 +23,7 @@ for i in {1..2100}; do
     actual=$(../$executable < "input.$i" 2> /dev/null )
     actualerr=$(../$executable < "input.$i" 2>&1 > /dev/null)
     expected=$(tail -n 1 "output.$i")
-    expectederr=$(head -n -1 "output.$i")
+    expectederr=$(ghead -n -1 "output.$i")
     if [[ ! "$actual" =~ ^[\s]*-?[0-9]+[\s]*$ ]] || [[ ! "$expected" =~ ^[\s]*-?[0-9]+[\s]*$ ]] || [[  "$actual" -ne "$expected" ]] ; then
         printf "$errorColor"
         echo "fail! Expected \"$expected\" but found \"$actual\""
@@ -41,4 +41,4 @@ for i in {1..2100}; do
 done
 
 
-echo "$passes passes, $warnings warnings, $failures falures."
+echo "$passes passes, $warnings warnings, $failures failures."
